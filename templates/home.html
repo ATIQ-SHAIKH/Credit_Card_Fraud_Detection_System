@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="shortcut icon" href="{%static 'favicon.ico'%}" type="image/x-icon">
+  <link rel="stylesheet" href="{%static 'home.css'%}">
+  <title>CCFDS | Home</title>
+</head>
+
+<body>
+  <center>
+    <nav class="navbar navbar-default navbar-fixed-top blurry ">
+      <div class="blurrer"></div>
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header mx-auto">
+          <a class="navbar-brand" href="{%url 'home'%}">
+            <img src="{%static 'favicon.ico'%}"> Credit Card Fraud Detection System
+          </a>
+        </div>
+      </div><!-- /.container-fluid -->
+    </nav>
+    <div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+    <div class="typewrite">
+      <h1>
+        <a href="" class="typewrite" data-period="2000"
+          data-type='["In the financial year 2020-21, the number of frauds were 7,363 (Rs 1,38,422 crore)","Let&#39;s Beat the Fraud!" ]'>
+          <span class="wrap"></span>
+        </a>
+      </h1>
+    </div>
+
+
+    <form id="myForm" action="" method="POST" enctype="multipart/form-data">
+      <div class="drop-zone">
+        {% csrf_token %}
+        <span class="drop-zone__prompt">Drop .csv file here or click to upload</span>
+        <input class="drop-zone__input" type="file" id="csvFile" name="csvFile" accept=".csv" required />
+      </div>
+      <button type="submit">Predict</button>
+
+    </form>
+  </center>
+
+
+  {% if d %}
+  <div class="table-responsive-sm ">
+    <div class="table">
+      <table class="table">
+        <thead>
+          <tr class="table-dark">
+            {% for i in column_headers %}
+            <th>{{i}}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          <!-- jinja2 Technique -->
+          {% for i in d %}
+          <tr class="table-dark">
+            <td>{{i.V1}}</td>
+            <td>{{i.V1}}</td>
+            <td>{{i.V2}}</td>
+            <td>{{i.V3}}</td>
+            <td>{{i.V4}}</td>
+            <td>{{i.V5}}</td>
+            <td>{{i.V6}}</td>
+            <td>{{i.V7}}</td>
+            <td>{{i.V8}}</td>
+            <td>{{i.Amount}}</td>
+            {% if i.Results == 1 %}
+            <td>Fraud</td>
+            {% else %}
+            <td>Non-Fraudulent</td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+  <script src="{%static 'home.js'%}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+</body>
+</html>
